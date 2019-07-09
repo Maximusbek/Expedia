@@ -33,7 +33,8 @@ public class BugHunterz {
     }
 
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() throws InterruptedException{
+        Thread.sleep(2000);
         driver.close();
     }
 
@@ -71,8 +72,6 @@ public class BugHunterz {
         WebElement durationToDestination = driver.findElement(By.xpath("//span[@class='map-duration-text alt']"));
         System.out.println(durationToDestination.getText() + " from ORD to Waldorf Astoria, Chicago.");
 
-        Thread.sleep(3000);
-        driver.close();
     }
 
     @Test
@@ -104,8 +103,6 @@ public class BugHunterz {
         WebElement howManyCruisesFound = driver.findElement(By.xpath("//h1[@class='cruise-page-header universalFilterAriaHidden header']"));
         System.out.println(howManyCruisesFound.getText() + " found for your search criteria.");
 
-        Thread.sleep(3000);
-        driver.close();
     }
 
     @Test
@@ -152,8 +149,6 @@ public class BugHunterz {
         WebElement submitButton = driver.findElement(By.id("gcw-submit-car"));
         submitButton.click();
 
-        Thread.sleep(3000);
-        driver.close();
     }
 
 
