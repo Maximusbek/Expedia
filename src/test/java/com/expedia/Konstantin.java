@@ -40,7 +40,7 @@ public class Konstantin {
     @Test
     public void airportTransportationToHotelByKonstantin() throws InterruptedException{
 
-//      When  I search for airport transportation to specific hotel User should see map of the route with time to destination.
+//      When I search for airport transportation to specific hotel User should see map of the route with time to destination.
 //      1. Locate and click on Things to Do link
         WebElement thingsToDo = driver.findElement(By.id("tab-activity-tab-hp"));
         thingsToDo.click();
