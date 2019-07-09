@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -22,11 +23,11 @@ public class BugHunterz {
     @BeforeClass
     public void setup() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
     }
 
     @BeforeMethod
     public void navigate() {
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.expedia.com/");
@@ -38,10 +39,12 @@ public class BugHunterz {
         driver.close();
     }
 
-    @Test
+    @Test(priority = 1)
     public void airportTransportationToHotelByKonstantin() throws InterruptedException{
 
-//      When  I search for airport transportation to specific hotel User should see map of the route with time to destination.
+//      When  I search for airport transportation to specific hotel User should see map of the route
+//      with time to destination.
+
 //      1. Locate and click on Things to Do link
         WebElement thingsToDo = driver.findElement(By.id("tab-activity-tab-hp"));
         thingsToDo.click();
@@ -74,14 +77,10 @@ public class BugHunterz {
 
     }
 
-    @Test
+    @Test(priority = 2)
     public static void searchForCruiseByTimeDestinationByKonstantin() throws InterruptedException{
 
 //      Verifying how many cruises available for selection after specifying destination and date.
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.expedia.com/");
 
 //      1. Locate and select Cruises
         WebElement cruisesHeader = driver.findElement(By.id("primary-header-cruise"));
@@ -105,14 +104,10 @@ public class BugHunterz {
 
     }
 
-    @Test
+    @Test(priority = 3)
     public static void filteringCarsByTypeByKonstantin() throws InterruptedException{
 
 //      Filtering car's search by car type
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.expedia.com/");
 
 //      1. Locating and selscting Car link in header
         WebElement carsHeaderLink = driver.findElement(By.id("primary-header-car"));
@@ -152,24 +147,27 @@ public class BugHunterz {
     }
 
 
-    @Test(priority = 1)
+    @Test(priority = 4)
     public void David_ChangeingTheLanguage_Test() throws InterruptedException {
-        WebElement language = driver.findElement(By.xpath("(//a[@id='onPageModalPickerLink01'])[2]"));
-        language.click();
-        Thread.sleep(4000);
-        WebElement languageButton = driver.findElement(By.xpath("(//div[@class='picker-dropdown menu-bar'])[7]"));
-        languageButton.click();
-        Thread.sleep(1000);
-        WebElement english = driver.findElement(By.xpath("(//*[@data-language-name='English'])[3]"));
-        english.click();
-        Thread.sleep(1000);
-        WebElement saveButton = driver.findElement(By.id("multi-currency-multi-lang-save-btn-header"));
-        saveButton.click();
-        driver.close();
+        WebElement supportButton = driver.findElement(By.id("header-support-menu"));
+        supportButton.click();
+        Thread.sleep(2000);
+        WebElement customerSupportButton = driver.findElement(By.cssSelector("#support-cs"));
+        customerSupportButton.click();
+        Thread.sleep(2000);
+        WebElement messageCustomerSupport = driver.findElement(By.xpath("//h3[@class='aside-prompt']"));
+        if(messageCustomerSupport.isDisplayed()){
+        String messageDisplayed = messageCustomerSupport.getText();
+        String expectedMessage = "We're here to help.";
+        Assert.assertEquals(messageDisplayed, expectedMessage, "Message displayed is different from requirement");
+        } else{
+            System.out.println("Expected message is not displayed");
+        }
+
     }
 
 
-    @Test(priority = 2)
+    @Test(priority = 5)
     public void David_RentingACarByModel_Test() throws InterruptedException {
         WebElement carButton = driver.findElement(By.id("tab-car-tab-hp"));
         carButton.click();
@@ -186,7 +184,7 @@ public class BugHunterz {
     }
 
 
-    @Test(priority = 3)
+    @Test(priority = 6)
     public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
         WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
         hotelsButton.click();
