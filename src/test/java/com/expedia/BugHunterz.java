@@ -151,10 +151,10 @@ public class BugHunterz {
     public void David_ChangeingTheLanguage_Test() throws InterruptedException {
         WebElement supportButton = driver.findElement(By.id("header-support-menu"));
         supportButton.click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         WebElement customerSupportButton = driver.findElement(By.cssSelector("#support-cs"));
         customerSupportButton.click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         WebElement messageCustomerSupport = driver.findElement(By.xpath("//h3[@class='aside-prompt']"));
         if(messageCustomerSupport.isDisplayed()){
         String messageDisplayed = messageCustomerSupport.getText();
