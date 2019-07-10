@@ -615,10 +615,13 @@ public class BugHunterz {
 
         sf.Flight().click();
         sf.OneWay().click();
+        Thread.sleep(1000);
         sf.From().sendKeys("chi");
+        Thread.sleep(1000);
         sf.From().sendKeys(Keys.DOWN, Keys.ENTER);
-
-        sf.To().sendKeys("atl");
+        Thread.sleep(1000);
+        sf.To().sendKeys(" atl");
+        Thread.sleep(1000);
         sf.To().sendKeys(Keys.DOWN, Keys.ENTER);
 
 
@@ -628,10 +631,11 @@ public class BugHunterz {
         while (!driver.findElement(By.xpath("//div[@class='datepicker-cal-month']")).
                 findElement(By.cssSelector(".datepicker-cal-month-header")).getText().contains("Mar")){
             driver.findElement(By.xpath("//button[@class='datepicker-paging datepicker-next btn-paging btn-secondary next']")).click();
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
 
         driver.findElement(By.cssSelector("[data-day='12']")).click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[1]")).click();
 
         boolean check = driver.findElement(By.cssSelector(".title-city-text")).getText().contains("Select your departure to");
