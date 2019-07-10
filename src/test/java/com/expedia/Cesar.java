@@ -27,7 +27,6 @@ public class Cesar {
         eh = new ExpediaHomepage(driver);
         driver.get("http://expedia.com");
         driver.manage().timeouts().implicitlyWait(5 , TimeUnit.SECONDS);
-
     }
 
     @Test
@@ -54,6 +53,7 @@ public class Cesar {
         }
 
     }
+
     @Test
     public void searchConcertsByArtistCesar() throws InterruptedException
     {
@@ -78,6 +78,7 @@ public class Cesar {
             etp.getSearchBar().sendKeys("ACDC" + Keys.ENTER);
         }
     }
+
     @AfterMethod
     public void close()
     {
