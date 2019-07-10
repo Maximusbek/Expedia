@@ -237,15 +237,14 @@ public class BugHunterz {
 
     @Test(priority = 6)
     public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
-        WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
+        WebElement hotelsButton = driver.findElement(By.id("primary-header-hotel"));
         hotelsButton.click();
-        WebElement hoteldestination = driver.findElement(By.id("hotel-destination-hp-hotel"));
-        hoteldestination.sendKeys("Chicago, Illinois");
-        Thread.sleep(3000);
-        WebElement searchButton = driver.findElement(By.xpath("(//button[@data-gcw-change-submit-text='Search'])[1]"));
-        searchButton.click();
         Thread.sleep(2000);
-        WebElement GuestRatingRadioButton = driver.findElement(By.id("radio-guestRating-45"));
+        WebElement hoteldestination = driver.findElement(By.xpath("//input[@aria-autocomplete='list']"));
+        hoteldestination.sendKeys("Chicago, Illinois" + Keys.DOWN);
+        hoteldestination.sendKeys(Keys.ENTER);
+        Thread.sleep(4000);
+        WebElement GuestRatingRadioButton = driver.findElement(By.xpath("//input[@id='radio-sort-guestRating']"));
         GuestRatingRadioButton.click();
 
     }
@@ -616,10 +615,13 @@ public class BugHunterz {
 
         sf.Flight().click();
         sf.OneWay().click();
+        Thread.sleep(1000);
         sf.From().sendKeys("chi");
+        Thread.sleep(1000);
         sf.From().sendKeys(Keys.DOWN, Keys.ENTER);
-
-        sf.To().sendKeys("atl");
+        Thread.sleep(1000);
+        sf.To().sendKeys(" atl");
+        Thread.sleep(1000);
         sf.To().sendKeys(Keys.DOWN, Keys.ENTER);
 
 
@@ -629,10 +631,11 @@ public class BugHunterz {
         while (!driver.findElement(By.xpath("//div[@class='datepicker-cal-month']")).
                 findElement(By.cssSelector(".datepicker-cal-month-header")).getText().contains("Mar")){
             driver.findElement(By.xpath("//button[@class='datepicker-paging datepicker-next btn-paging btn-secondary next']")).click();
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
 
         driver.findElement(By.cssSelector("[data-day='12']")).click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[1]")).click();
 
         boolean check = driver.findElement(By.cssSelector(".title-city-text")).getText().contains("Select your departure to");
