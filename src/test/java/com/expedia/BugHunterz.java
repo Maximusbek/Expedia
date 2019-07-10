@@ -88,7 +88,7 @@ public class BugHunterz {
 
     @AfterMethod
     public void tearDown() throws InterruptedException{
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         driver.close();
     }
 
@@ -535,7 +535,7 @@ public class BugHunterz {
         dateTo.click();
         WebElement searchButton = driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[4]"));
         searchButton.click();
-        Thread.sleep(7000);
+
     }
     @Test(priority = 14)
     public  void Aizada_PressOnTickets2() throws InterruptedException{
@@ -572,7 +572,7 @@ public class BugHunterz {
         Actions down = new Actions(driver);
         down.moveToElement(ticketsAtractions);
         ticketsAtractions.click();
-        Thread.sleep(10000);
+
 
     }@Test (priority = 15)
     public void Aizada_PressOnInterests() throws InterruptedException{
@@ -608,7 +608,7 @@ public class BugHunterz {
         Actions down = new Actions(driver);
         down.moveToElement(interestsAtractions);
         interestsAtractions.click();
-        Thread.sleep(7000);
+
     }
     @Test(priority = 16)
     public void Nadejda_ScheduleFlightEightMonthsInAdvance()throws InterruptedException{
