@@ -93,7 +93,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 1)
-    public void airportTransportationToHotelByKonstantin() throws InterruptedException{
+    public void Konstantin_airportTransportationToHotel() throws InterruptedException{
 
 //      When  I search for airport transportation to specific hotel User should see map of the route
 //      with time to destination.
@@ -131,7 +131,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 2)
-    public static void searchForCruiseByTimeDestinationByKonstantin() throws InterruptedException{
+    public static void Konstantin_searchForCruiseByTimeDestination() throws InterruptedException{
 
 //      Verifying how many cruises available for selection after specifying destination and date.
 
@@ -158,7 +158,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 3)
-    public static void filteringCarsByTypeByKonstantin() throws InterruptedException{
+    public static void Konstantin_filteringCarsByType() throws InterruptedException{
 
 //      Filtering car's search by car type
 
@@ -219,7 +219,6 @@ public class BugHunterz {
 
     }
 
-
     @Test(priority = 5)
     public void David_RentingACarByModel_Test() throws InterruptedException {
         WebElement carButton = driver.findElement(By.id("tab-car-tab-hp"));
@@ -236,13 +235,13 @@ public class BugHunterz {
         Thread.sleep(1000);
     }
 
-
     @Test(priority = 6)
     public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
         WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
         hotelsButton.click();
         WebElement hoteldestination = driver.findElement(By.id("hotel-destination-hp-hotel"));
         hoteldestination.sendKeys("Chicago, Illinois");
+        Thread.sleep(3000);
         WebElement searchButton = driver.findElement(By.xpath("(//button[@data-gcw-change-submit-text='Search'])[1]"));
         searchButton.click();
         Thread.sleep(2000);
@@ -251,8 +250,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 7)
-
-    public void editMySearchResults(){
+    public void Hamza_editMySearchResults(){
         HamzaUtil();
         //   Once i put my search preferences  i should be able to change it from the same page.
 
@@ -271,7 +269,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 8)
-    public void navigateToTheHomePageByClickingExpediaLogo(){
+    public void Hamza_navigateToTheHomePageByClickingExpediaLogo(){
         HamzaUtil();
         //I want to be able to go to home page by clicking the Expedia icon and discart everything.
 
@@ -286,7 +284,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 9)
-    public void lookUpMySearchHistory(){
+    public void Hamza_lookUpMySearchHistory(){
         HamzaUtil();
         // I want to be able to see the history of my searches.
 
@@ -307,7 +305,7 @@ public class BugHunterz {
         Assert.assertTrue(check);
     }
     @Test(priority = 10)
-    public static void BundleAndSaveEmre() throws InterruptedException {
+    public static void Emre_BundleAndSave() throws InterruptedException {
         /*EMRE*/
         /*I want to bundle flight and hotel and get savings*/
 
@@ -355,7 +353,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 11)
-    public static void RoundTripEmre() throws InterruptedException {
+    public static void Emre_RoundTrip() throws InterruptedException {
         /*EMRE*/
         /*I want to be able to shedule a roundtrip flight.*/
 
@@ -445,7 +443,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 12)
-    public static void BestPricesEmre() throws InterruptedException {
+    public static void Emre_BestPrices() throws InterruptedException {
         /*EMRE*/
         /*I want to get the best prices first when searching for flights.*/
 
@@ -509,7 +507,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 13)
-    public  void thingsToDo1() throws InterruptedException{
+    public  void Aizada_thingsToDo1() throws InterruptedException{
 
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
@@ -540,7 +538,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 14)
-    public  void pressOnTickets2() throws InterruptedException{
+    public  void Aizada_pressOnTickets2() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -553,6 +551,7 @@ public class BugHunterz {
             destination.sendKeys(Keys.DOWN);
         }
         destination.sendKeys(Keys.ENTER);
+        Thread.sleep(3000);
         WebElement dateBox = driver.findElement(By.cssSelector("#activity-start-hp-activity"));
         dateBox.click();
         Thread.sleep(3000);
@@ -576,7 +575,7 @@ public class BugHunterz {
         Thread.sleep(10000);
 
     }@Test (priority = 15)
-    public  void pressOnInterests() throws InterruptedException{
+    public void Aizada_pressOnInterests() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -612,7 +611,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 16)
-    public void scheduleFlightEightMonthsInAdvance()throws InterruptedException{
+    public void Nadejda_scheduleFlightEightMonthsInAdvance()throws InterruptedException{
         // Scenario: I want to be able to schedule my flights eight months in advance
 
         sf.Flight().click();
@@ -630,7 +629,7 @@ public class BugHunterz {
         while (!driver.findElement(By.xpath("//div[@class='datepicker-cal-month']")).
                 findElement(By.cssSelector(".datepicker-cal-month-header")).getText().contains("Mar")){
             driver.findElement(By.xpath("//button[@class='datepicker-paging datepicker-next btn-paging btn-secondary next']")).click();
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         }
 
         driver.findElement(By.cssSelector("[data-day='12']")).click();
@@ -640,7 +639,7 @@ public class BugHunterz {
         Assert.assertTrue(check,"Verification of calendar FAILED");
     }
     @Test(priority = 17)
-    public void getCustomerSupport(){
+    public void Nadejda_getCustomerSupport(){
         // Scenario2: I want to be able to get customer support.
 
         //clicking on suport button
@@ -670,7 +669,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 18)
-    public void getSuggestionsWhenLookingForDestination(){
+    public void Nadejda_getSuggestionsWhenLookingForDestination(){
         //I want to get suggestion when i start searching for a destination.
 
         sf.HotelButton().click();
@@ -688,7 +687,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 19)
-    public void gulmira_sortHotelPriceMethod1_test() throws InterruptedException {
+    public void Gulmira_sortHotelPriceMethod1_test() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
@@ -723,7 +722,7 @@ public class BugHunterz {
     //I want to be able to search for vacation rentals and get a list with the available dates that im looking for
 
     @Test(priority = 20)
-    public void gulmira_vacationRentalsSearchMethod2_test() throws InterruptedException {
+    public void Gulmira_vacationRentalsSearchMethod2_test() throws InterruptedException {
         WebElement vacationRentals = driver.findElement(By.id("primary-header-vacationRental"));
         vacationRentals.click();
         WebElement destination = driver.findElement(By.id("VR-destination"));
@@ -755,7 +754,7 @@ public class BugHunterz {
     //I want to see the number of reviews and rating of each hotel
 
     @Test(priority = 21)
-    public void gulmira_hotelReviewAndRatingMethod3_test() throws InterruptedException {
+    public void Gulmira_hotelReviewAndRatingMethod3_test() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
@@ -788,7 +787,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 22)
-    public void searchUpcomingGamesCesar()
+    public void Cesar_searchUpcomingGames()
     {
         //1 - Clicks On "Things To Do" tab on the top navigation bar
         eh.thingsToDoTab().click();
@@ -813,7 +812,7 @@ public class BugHunterz {
     }
 
     @Test(priority =  23)
-    public void searchConcertsByArtistCesar() throws InterruptedException
+    public void Cesar_searchConcertsByArtist() throws InterruptedException
     {
         //1 - Clicks On "Things To Do" tab on the top navigation bar
         eh.thingsToDoTab().click();
@@ -838,7 +837,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 24)
-    public void findHomeGameCesar() throws InterruptedException
+    public void Cesar_findHomeGame() throws InterruptedException
     {
         //1 - Clicks On "Things To Do" tab on the top navigation bar
         eh.thingsToDoTab().click();
