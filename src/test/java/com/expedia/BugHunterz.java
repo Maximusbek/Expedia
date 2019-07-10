@@ -569,7 +569,8 @@ public class BugHunterz {
         ticketsAtractions.click();
         Thread.sleep(10000);
 
-    }@Test (priority = 15)
+    }
+    @Test (priority = 15)
     public  void pressOnInterests() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
