@@ -237,15 +237,14 @@ public class BugHunterz {
 
     @Test(priority = 6)
     public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
-        WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
+        WebElement hotelsButton = driver.findElement(By.id("primary-header-hotel"));
         hotelsButton.click();
-        WebElement hoteldestination = driver.findElement(By.id("hotel-destination-hp-hotel"));
-        hoteldestination.sendKeys("Chicago, Illinois");
-        Thread.sleep(3000);
-        WebElement searchButton = driver.findElement(By.xpath("(//button[@data-gcw-change-submit-text='Search'])[1]"));
-        searchButton.click();
         Thread.sleep(2000);
-        WebElement GuestRatingRadioButton = driver.findElement(By.id("radio-guestRating-45"));
+        WebElement hoteldestination = driver.findElement(By.xpath("//input[@aria-autocomplete='list']"));
+        hoteldestination.sendKeys("Chicago, Illinois" + Keys.DOWN);
+        hoteldestination.sendKeys(Keys.ENTER);
+        Thread.sleep(4000);
+        WebElement GuestRatingRadioButton = driver.findElement(By.xpath("//input[@id='radio-sort-guestRating']"));
         GuestRatingRadioButton.click();
 
     }
