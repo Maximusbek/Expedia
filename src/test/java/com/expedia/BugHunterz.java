@@ -244,8 +244,8 @@ public class BugHunterz {
         GuestRatingRadioButton.click();
 
     }
-    @Test(priority = 7)
 
+    @Test(priority = 7)
     public void editMySearchResults(){
         HamzaUtil();
         //   Once i put my search preferences  i should be able to change it from the same page.
