@@ -40,6 +40,7 @@ public class BugHunterz {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         eh = new ExpediaHomePage2(driver);
         sp = new SearchPage(driver);
+        sf = new BaseClass(driver);
         d = new WebDriverWait(driver, 15);
         driver.get("https://www.expedia.com/");
 
