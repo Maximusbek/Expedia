@@ -13,8 +13,8 @@ public class EventTicketsPage {
         this.driver = driver;
     }
 
-    By destinationLink = By.cssSelector("#locationLink");
-    By currentLocationLink = By.cssSelector("#currentLocation");
+    By destinationLink = By.id("locationLink");
+    By currentLocationLink = By.cssSelector("a#currentLocation");
     By searchBar = By.name("q");
 
 

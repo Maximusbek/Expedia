@@ -1,8 +1,7 @@
 package com.expedia;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import localrepository.ExpediaHomePage2;
-import localrepository.SearchPage;
+import localrepository.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -24,9 +23,11 @@ public class BugHunterz {
 
     static WebDriver driver;
     static WebDriverWait d;
-    static ExpediaHomePage2 eh;
+    static ExpediaHomePage2 eh2;
     static SearchPage sp;
     static BaseClass sf;
+    static ExpediaHomepage eh;
+    static EventTicketsPage etp;
 
     @BeforeClass
     public void setup() {
@@ -38,47 +39,51 @@ public class BugHunterz {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        eh = new ExpediaHomePage2(driver);
+        eh2 = new ExpediaHomePage2(driver);
         sp = new SearchPage(driver);
         sf = new BaseClass(driver);
         d = new WebDriverWait(driver, 15);
+        eh = new ExpediaHomepage(driver);
+        etp = new EventTicketsPage(driver);
+
+
         driver.get("https://www.expedia.com/");
 
     }
 
     public void HamzaUtil(){
-        eh.flightsButton().click();
-        eh.setDeparture().sendKeys("   chi" + Keys.SHIFT);
-        eh.setDeparture().sendKeys(Keys.DOWN, Keys.DOWN);
-        eh.setDeparture().sendKeys(Keys.ENTER);
+        eh2.flightsButton().click();
+        eh2.setDeparture().sendKeys("   chi" + Keys.SHIFT);
+        eh2.setDeparture().sendKeys(Keys.DOWN, Keys.DOWN);
+        eh2.setDeparture().sendKeys(Keys.ENTER);
 
-        eh.setDestination().sendKeys("   oma" + Keys.SHIFT);
-        eh.setDestination().sendKeys(Keys.DOWN, Keys.DOWN);
-        eh.setDestination().sendKeys(Keys.ENTER);
+        eh2.setDestination().sendKeys("   oma" + Keys.SHIFT);
+        eh2.setDestination().sendKeys(Keys.DOWN, Keys.DOWN);
+        eh2.setDestination().sendKeys(Keys.ENTER);
 
 
-        eh.setDepartureDay().click();
-        eh.pickMonthandDay("Dec","11");
+        eh2.setDepartureDay().click();
+        eh2.pickMonthandDay("Dec","11");
 
         sp.setReturnDay().click();
-        eh.pickMonthandDay("Dec","15");
+        eh2.pickMonthandDay("Dec","15");
 
-        eh.passengers().click();
+        eh2.passengers().click();
 
-        List<WebElement> listOfPassengers = eh.listOfPassengers();
+        List<WebElement> listOfPassengers = eh2.listOfPassengers();
         listOfPassengers.get(0).click();
         listOfPassengers.get(0).click();
         listOfPassengers.get(1).click();
 
-        Select s = new Select(eh.setChildren());
+        Select s = new Select(eh2.setChildren());
         s.selectByVisibleText("4");
         listOfPassengers.get(2).click();
 
-        s = new Select(eh.setInfants());
+        s = new Select(eh2.setInfants());
         s.selectByVisibleText("1");
 
-        eh.closePassengertab().click();
-        eh.Search().click();
+        eh2.closePassengertab().click();
+        eh2.Search().click();
     }
 
     @AfterMethod
@@ -292,11 +297,11 @@ public class BugHunterz {
 
         sp.expediaButton().click();
 
-        eh.searchHistory().click();
+        eh2.searchHistory().click();
 
-        eh.recentSearches().click();
+        eh2.recentSearches().click();
 
-        List<WebElement> listOfSearches = eh.getListOfPackages();
+        List<WebElement> listOfSearches = eh2.getListOfPackages();
 
         boolean check = listOfSearches.size()>0;
         Assert.assertTrue(check);
@@ -631,8 +636,8 @@ public class BugHunterz {
         driver.findElement(By.cssSelector("[data-day='12']")).click();
         driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[1]")).click();
 
-        boolean check = driver.findElement(By.cssSelector(".title-city-text").getText().contains("Select your departure to");
-           Assert.assertTrue(check,"Verification of calendar FAILED")
+        boolean check = driver.findElement(By.cssSelector(".title-city-text")).getText().contains("Select your departure to");
+           Assert.assertTrue(check,"Verification of calendar FAILED");
     }
     @Test(priority = 17)
     public void getCustomerSupport(){
@@ -781,5 +786,97 @@ public class BugHunterz {
             System.out.println("List of Reviews and Ratings are Passed");
         }
     }
+
+    @Test(priority = 22)
+    public void searchUpcomingGamesCesar()
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+
+        }
+        //3 - Finally it searches up "Chicago Bears" within the search bar.
+        finally
+        {
+            etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
+        }
+
+    }
+
+    @Test(priority =  23)
+    public void searchConcertsByArtistCesar() throws InterruptedException
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+
+        }
+        //3 - Finally it searches up "ACDC" within the search bar and hits ENTER.
+        finally
+        {
+            Thread.sleep(3000);
+            etp.getSearchBar().sendKeys("ACDC" + Keys.ENTER);
+        }
+    }
+
+    @Test(priority = 24)
+    public void findHomeGameCesar() throws InterruptedException
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+        }
+        finally
+        {
+            Thread.sleep(4000);
+
+            //Clicks On "Destination" & clicks on "Current Location"
+            etp.getDestinationLink().click();
+            etp.getCurrentLocationLink().click();
+
+            //Searches "Chicago Bears" in the search bar
+            Thread.sleep(3000);
+            etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
+
+            //Now we should choose the first option if the it says 'Chicago, IL'
+            //That means that game will be home game
+            if(driver.findElement(By.xpath("//div[@class = 'event-list']/div/a/table/tbody/tr/td[2]/div/div[2]/span/span")).getText().contains("Chicago"))
+            {
+                //Click on the element
+                driver.findElement(By.xpath("//div[@class = 'event-list']/div/a")).click();
+
+            }
+        }
+
+
+    }
+
 
 }

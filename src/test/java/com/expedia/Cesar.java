@@ -31,11 +31,13 @@ public class Cesar {
     }
 
     @Test
-    public void searchUpcomingGames()
+    public void searchUpcomingGamesCesar()
     {
-
-        //Ameer was here
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
         eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
         try
         {
             eh.eventTicketsTab().click();
@@ -45,6 +47,7 @@ public class Cesar {
             driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
 
         }
+        //3 - Finally it searches up "Chicago Bears" within the search bar.
         finally
         {
             etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
@@ -52,9 +55,13 @@ public class Cesar {
 
     }
     @Test
-    public void searchConcertsByArtist() throws InterruptedException
+    public void searchConcertsByArtistCesar() throws InterruptedException
     {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
         eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
         try
         {
             eh.eventTicketsTab().click();
@@ -64,6 +71,7 @@ public class Cesar {
             driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
 
         }
+        //3 - Finally it searches up "ACDC" within the search bar and hits ENTER.
         finally
         {
            Thread.sleep(3000);
@@ -77,26 +85,43 @@ public class Cesar {
     }
 
     @Test
-    public void findHomeGame() throws InterruptedException
+    public void findHomeGameCesar() throws InterruptedException
     {
-        driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
 
-        Thread.sleep(4000);
-        etp.getDestinationLink().click();
-        etp.getCurrentLocationLink().click();
-
-        Thread.sleep(3000);
-        etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
-
-        //Now we should choose the first option if the it says 'Chicago, IL'
-        //That means that game will be home game
-
-        if(driver.findElement(By.xpath("//div[@class = 'event-list']/div/a/table/tbody/tr/td[2]/div/div[2]/span/span")).getText().contains("Chicago"))
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
         {
-            //Click on the element
-            driver.findElement(By.xpath("//div[@class = 'event-list']/div/a")).click();
-
+            eh.eventTicketsTab().click();
         }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+        }
+        finally
+        {
+            Thread.sleep(4000);
+
+            //Clicks On "Destination" & clicks on "Current Location"
+            etp.getDestinationLink().click();
+            etp.getCurrentLocationLink().click();
+
+            //Searches "Chicago Bears" in the search bar
+            Thread.sleep(3000);
+            etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
+
+            //Now we should choose the first option if the it says 'Chicago, IL'
+            //That means that game will be home game
+            if(driver.findElement(By.xpath("//div[@class = 'event-list']/div/a/table/tbody/tr/td[2]/div/div[2]/span/span")).getText().contains("Chicago"))
+            {
+                //Click on the element
+                driver.findElement(By.xpath("//div[@class = 'event-list']/div/a")).click();
+
+            }
+        }
+
 
     }
 }
