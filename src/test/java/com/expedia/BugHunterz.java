@@ -1,6 +1,7 @@
 package com.expedia;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import localrepository.BaseClass;
 import localrepository.ExpediaHomePage2;
 import localrepository.SearchPage;
 import org.openqa.selenium.By;
@@ -196,7 +197,7 @@ public class BugHunterz {
 
 
     @Test(priority = 4)
-    public void David_ChangeingTheLanguage_Test() throws InterruptedException {
+    public void ChangeingTheLanguage_TestByDavid() throws InterruptedException {
         WebElement supportButton = driver.findElement(By.id("header-support-menu"));
         supportButton.click();
         Thread.sleep(2000);
@@ -214,9 +215,8 @@ public class BugHunterz {
 
     }
 
-
     @Test(priority = 5)
-    public void David_RentingACarByModel_Test() throws InterruptedException {
+    public void RentingACarByModel_TestByDavid() throws InterruptedException {
         WebElement carButton = driver.findElement(By.id("tab-car-tab-hp"));
         carButton.click();
         Thread.sleep(3000);
@@ -233,7 +233,7 @@ public class BugHunterz {
 
 
     @Test(priority = 6)
-    public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
+    public void LookAHotelByGuestRating_TestByDavid() throws InterruptedException {
         WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
         hotelsButton.click();
         WebElement hoteldestination = driver.findElement(By.id("hotel-destination-hp-hotel"));
@@ -245,9 +245,9 @@ public class BugHunterz {
         GuestRatingRadioButton.click();
 
     }
-    @Test(priority = 7)
 
-    public void editMySearchResults(){
+    @Test(priority = 7)
+    public void editMySearchResultsByAmirHamza(){
         HamzaUtil();
         //   Once i put my search preferences  i should be able to change it from the same page.
 
@@ -266,7 +266,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 8)
-    public void navigateToTheHomePageByClickingExpediaLogo(){
+    public void navigateToTheHomePageByClickingExpediaLogoByAmirHamza(){
         HamzaUtil();
         //I want to be able to go to home page by clicking the Expedia icon and discart everything.
 
@@ -281,7 +281,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 9)
-    public void lookUpMySearchHistory(){
+    public void lookUpMySearchHistoryByAmirHamza(){
         HamzaUtil();
         // I want to be able to see the history of my searches.
 
@@ -302,7 +302,7 @@ public class BugHunterz {
         Assert.assertTrue(check);
     }
     @Test(priority = 10)
-    public static void BundleAndSaveEmre() throws InterruptedException {
+    public static void BundleAndSaveByEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to bundle flight and hotel and get savings*/
 
@@ -350,7 +350,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 11)
-    public static void RoundTripEmre() throws InterruptedException {
+    public static void RoundTripByEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to be able to shedule a roundtrip flight.*/
 
@@ -440,7 +440,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 12)
-    public static void BestPricesEmre() throws InterruptedException {
+    public static void BestPricesByEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to get the best prices first when searching for flights.*/
 
@@ -504,7 +504,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 13)
-    public  void thingsToDo1() throws InterruptedException{
+    public  void thingsToDo1ByAizada() throws InterruptedException{
 
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
@@ -535,7 +535,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 14)
-    public  void pressOnTickets2() throws InterruptedException{
+    public  void pressOnTickets2ByAizada() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -570,8 +570,9 @@ public class BugHunterz {
         ticketsAtractions.click();
         Thread.sleep(10000);
 
-    }@Test (priority = 15)
-    public  void pressOnInterests() throws InterruptedException{
+    }
+    @Test (priority = 15)
+    public  void pressOnInterestsByAizada() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -607,7 +608,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 16)
-    public void scheduleFlightEightMonthsInAdvance()throws InterruptedException{
+    public void scheduleFlightEightMonthsInAdvanceByNadejda()throws InterruptedException{
         // Scenario: I want to be able to schedule my flights eight months in advance
 
         sf.Flight().click();
@@ -631,11 +632,11 @@ public class BugHunterz {
         driver.findElement(By.cssSelector("[data-day='12']")).click();
         driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[1]")).click();
 
-        boolean check = driver.findElement(By.cssSelector(".title-city-text").getText().contains("Select your departure to");
-           Assert.assertTrue(check,"Verification of calendar FAILED")
+        boolean check = driver.findElement(By.cssSelector(".title-city-text")).getText().contains("Select your departure to");
+           Assert.assertTrue(check,"Verification of calendar FAILED");
     }
     @Test(priority = 17)
-    public void getCustomerSupport(){
+    public void getCustomerSupportByNadejda(){
         // Scenario2: I want to be able to get customer support.
 
         //clicking on suport button
@@ -665,7 +666,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 18)
-    public void getSuggestionsWhenLookingForDestination(){
+    public void getSuggestionsWhenLookingForDestinationByNadejda(){
         //I want to get suggestion when i start searching for a destination.
 
         sf.HotelButton().click();
@@ -683,7 +684,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 19)
-    public void gulmira_sortHotelPriceMethod1_test() throws InterruptedException {
+    public void ortHotelPriceMethod1_testByGulmira() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
@@ -718,7 +719,7 @@ public class BugHunterz {
     //I want to be able to search for vacation rentals and get a list with the available dates that im looking for
 
     @Test(priority = 20)
-    public void gulmira_vacationRentalsSearchMethod2_test() throws InterruptedException {
+    public void vacationRentalsSearchMethod2_testByGulmira() throws InterruptedException {
         WebElement vacationRentals = driver.findElement(By.id("primary-header-vacationRental"));
         vacationRentals.click();
         WebElement destination = driver.findElement(By.id("VR-destination"));
@@ -750,7 +751,7 @@ public class BugHunterz {
     //I want to see the number of reviews and rating of each hotel
 
     @Test(priority = 21)
-    public void gulmira_hotelReviewAndRatingMethod3_test() throws InterruptedException {
+    public void hotelReviewAndRatingMethod3_testByGulmira() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
