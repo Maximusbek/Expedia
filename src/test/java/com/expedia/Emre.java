@@ -6,29 +6,77 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Emre {
     static  WebDriver driver;
-    public static void main(String[] args)throws InterruptedException {
+    @BeforeMethod
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
-
-        RoundTrip();
-
-        BundleAndSave();
-
-        BestPrices();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://www.expedia.com/");
     }
-    public static void RoundTrip() throws InterruptedException {
+
+    @Test
+    public static void BundleAndSaveEmre() throws InterruptedException {
+        /*EMRE*/
+        /*I want to bundle flight and hotel and get savings*/
+
+        WebElement bundleAndSave = driver.findElement(By.id("primary-header-package"));
+        bundleAndSave.click();
+        Thread.sleep(5000);
+        WebElement origin = driver.findElement(By.xpath("//input[@id='package-origin-plp-fh']"));
+        origin.click();
+        origin.clear();
+        origin.sendKeys("chi");
+        Thread.sleep(3000);
+        origin.sendKeys(Keys.DOWN);
+        origin.sendKeys(Keys.ENTER);
+
+        WebElement destination = driver.findElement(By.cssSelector("#package-destination-plp-fh"));
+        destination.click();
+        destination.sendKeys("new");
+        Thread.sleep(3000);
+        destination.sendKeys(Keys.DOWN);
+        destination.sendKeys(Keys.ENTER);
+
+        WebElement departing = driver.findElement(By.id("package-departing-plp-fh"));
+        departing.click();
+        WebElement jul2019ForDeparting = driver.findElement(By.xpath("//caption[contains(text(),'Aug 2019')]"));
+        WebElement departingDay = driver.findElement(By.xpath("(//button[@data-day='29'])[2]"));
+
+        if(jul2019ForDeparting.getText().contains("Aug 2019")){
+            departingDay.click();
+            /*selecting August 29*/
+        }
+
+        Thread.sleep(3000);
+        WebElement returning = driver.findElement(By.cssSelector("#package-returning-plp-fh"));
+        returning.click();
+        WebElement jul2019ForReturning = driver.findElement(By.xpath("//caption[contains(text(),'Aug 2019')]"));
+        WebElement returningDay = driver.findElement(By.xpath("(//button[@data-day='30'])[1]"));
+        if(jul2019ForReturning.getText().contains("Aug 2019")) {
+            returningDay.click();
+            /*selecting August 30*/
+        }
+
+        WebElement search = driver.findElement(By.id("search-button-plp-fh"));
+        search.click();
+
+    }
+
+    @Test
+    public static void RoundTripEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to be able to shedule a roundtrip flight.*/
 
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://www.expedia.com/");
         WebElement flight = driver.findElement(By.cssSelector("#tab-flight-tab-hp"));
         flight.click();
 
@@ -82,11 +130,19 @@ public class Emre {
 
         Thread.sleep(3000);
         WebElement selectThisFare = driver.findElement(By.xpath("(//button[@class='btn-secondary btn-action t-select-btn'])[1]"));
-        selectThisFare.click();
+        try {
+            selectThisFare.click();
+        }catch (Exception e){
+
+        }
 
         Thread.sleep(3000);
         WebElement selectSecondFly =driver.findElement(By.xpath("(//button[@class='btn-secondary btn-action t-select-btn'])[1]"));
-        selectSecondFly.click();
+        try {
+            selectSecondFly.click();
+        }catch (Exception e){
+
+        }
 
         Thread.sleep(3000);
         WebElement noThanks = driver.findElement(By.xpath("//a[@id='forcedChoiceNoThanks']"));
@@ -103,65 +159,14 @@ public class Emre {
         if(noThanks.isDisplayed()) {
             noThanks.click();
         }
-        driver.close();
+
     }
-    public static void BundleAndSave() throws InterruptedException {
-        /*EMRE*/
-        /*I want to bundle flight and hotel and get savings*/
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("https://www.expedia.com/");
-        WebElement bundleAndSave = driver.findElement(By.id("primary-header-package"));
-        bundleAndSave.click();
-        Thread.sleep(5000);
-        WebElement origin = driver.findElement(By.xpath("//input[@id='package-origin-plp-fh']"));
-        origin.click();
-        origin.clear();
-        origin.sendKeys("chi");
-        Thread.sleep(3000);
-        origin.sendKeys(Keys.DOWN);
-        origin.sendKeys(Keys.ENTER);
 
-        WebElement destination = driver.findElement(By.cssSelector("#package-destination-plp-fh"));
-        destination.click();
-        destination.sendKeys("new");
-        Thread.sleep(3000);
-        destination.sendKeys(Keys.DOWN);
-        destination.sendKeys(Keys.ENTER);
-
-        WebElement departing = driver.findElement(By.id("package-departing-plp-fh"));
-        departing.click();
-        WebElement jul2019ForDeparting = driver.findElement(By.xpath("//caption[contains(text(),'Aug 2019')]"));
-        WebElement departingDay = driver.findElement(By.xpath("(//button[@data-day='29'])[2]"));
-
-        if(jul2019ForDeparting.getText().contains("Aug 2019")){
-            departingDay.click();
-            /*selecting August 29*/
-        }
-
-        Thread.sleep(3000);
-        WebElement returning = driver.findElement(By.cssSelector("#package-returning-plp-fh"));
-        returning.click();
-        WebElement jul2019ForReturning = driver.findElement(By.xpath("//caption[contains(text(),'Aug 2019')]"));
-        WebElement returningDay = driver.findElement(By.xpath("(//button[@data-day='30'])[1]"));
-        if(jul2019ForReturning.getText().contains("Aug 2019")) {
-            returningDay.click();
-            /*selecting August 30*/
-        }
-
-        WebElement search = driver.findElement(By.id("search-button-plp-fh"));
-        search.click();
-
-        driver.close();
-    }
-    public static void BestPrices() throws InterruptedException {
+    @Test
+    public static void BestPricesEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to get the best prices first when searching for flights.*/
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://www.expedia.com/");
+
         WebElement flight = driver.findElement(By.cssSelector("#tab-flight-tab-hp"));
         flight.click();
 
@@ -202,7 +207,7 @@ public class Emre {
 
         WebElement returningDay = driver.findElement(By.xpath("(//button[@data-month='8'])[25]"));
         returningDay.click();
-        /*selecting Sep 29*/
+        /*selecting Sep 25*/
 
         WebElement search = driver.findElement(By.xpath
                 ("(//button[@class='btn-primary btn-action gcw-submit'])[1]"));
@@ -218,8 +223,7 @@ public class Emre {
             }
         }
         System.out.println("Best prices verification PASSED");
-        driver.close();
-
     }
+
 
 }
