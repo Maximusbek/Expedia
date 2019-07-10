@@ -225,9 +225,5 @@ public class Emre {
         System.out.println("Best prices verification PASSED");
     }
 
-    @AfterMethod
-    public void tearDown(){
-        driver.quit();
-    }
 
 }
