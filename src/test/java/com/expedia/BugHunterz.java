@@ -1,9 +1,7 @@
 package com.expedia;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import localrepository.BaseClass;
-import localrepository.ExpediaHomePage2;
-import localrepository.SearchPage;
+import localrepository.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -25,9 +23,11 @@ public class BugHunterz {
 
     static WebDriver driver;
     static WebDriverWait d;
-    static ExpediaHomePage2 eh;
+    static ExpediaHomePage2 eh2;
     static SearchPage sp;
     static BaseClass sf;
+    static ExpediaHomepage eh;
+    static EventTicketsPage etp;
 
     @BeforeClass
     public void setup() {
@@ -39,47 +39,51 @@ public class BugHunterz {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        eh = new ExpediaHomePage2(driver);
+        eh2 = new ExpediaHomePage2(driver);
         sp = new SearchPage(driver);
         sf = new BaseClass(driver);
         d = new WebDriverWait(driver, 15);
+        eh = new ExpediaHomepage(driver);
+        etp = new EventTicketsPage(driver);
+
+
         driver.get("https://www.expedia.com/");
 
     }
 
     public void HamzaUtil(){
-        eh.flightsButton().click();
-        eh.setDeparture().sendKeys("   chi" + Keys.SHIFT);
-        eh.setDeparture().sendKeys(Keys.DOWN, Keys.DOWN);
-        eh.setDeparture().sendKeys(Keys.ENTER);
+        eh2.flightsButton().click();
+        eh2.setDeparture().sendKeys("   chi" + Keys.SHIFT);
+        eh2.setDeparture().sendKeys(Keys.DOWN, Keys.DOWN);
+        eh2.setDeparture().sendKeys(Keys.ENTER);
 
-        eh.setDestination().sendKeys("   oma" + Keys.SHIFT);
-        eh.setDestination().sendKeys(Keys.DOWN, Keys.DOWN);
-        eh.setDestination().sendKeys(Keys.ENTER);
+        eh2.setDestination().sendKeys("   oma" + Keys.SHIFT);
+        eh2.setDestination().sendKeys(Keys.DOWN, Keys.DOWN);
+        eh2.setDestination().sendKeys(Keys.ENTER);
 
 
-        eh.setDepartureDay().click();
-        eh.pickMonthandDay("Dec","11");
+        eh2.setDepartureDay().click();
+        eh2.pickMonthandDay("Dec","11");
 
         sp.setReturnDay().click();
-        eh.pickMonthandDay("Dec","15");
+        eh2.pickMonthandDay("Dec","15");
 
-        eh.passengers().click();
+        eh2.passengers().click();
 
-        List<WebElement> listOfPassengers = eh.listOfPassengers();
+        List<WebElement> listOfPassengers = eh2.listOfPassengers();
         listOfPassengers.get(0).click();
         listOfPassengers.get(0).click();
         listOfPassengers.get(1).click();
 
-        Select s = new Select(eh.setChildren());
+        Select s = new Select(eh2.setChildren());
         s.selectByVisibleText("4");
         listOfPassengers.get(2).click();
 
-        s = new Select(eh.setInfants());
+        s = new Select(eh2.setInfants());
         s.selectByVisibleText("1");
 
-        eh.closePassengertab().click();
-        eh.Search().click();
+        eh2.closePassengertab().click();
+        eh2.Search().click();
     }
 
     @AfterMethod
@@ -197,7 +201,7 @@ public class BugHunterz {
 
 
     @Test(priority = 4)
-    public void ChangeingTheLanguage_TestByDavid() throws InterruptedException {
+    public void David_ChangeingTheLanguage_Test() throws InterruptedException {
         WebElement supportButton = driver.findElement(By.id("header-support-menu"));
         supportButton.click();
         Thread.sleep(2000);
@@ -206,17 +210,18 @@ public class BugHunterz {
         Thread.sleep(2000);
         WebElement messageCustomerSupport = driver.findElement(By.xpath("//h3[@class='aside-prompt']"));
         if(messageCustomerSupport.isDisplayed()){
-        String messageDisplayed = messageCustomerSupport.getText();
-        String expectedMessage = "We're here to help.";
-        Assert.assertEquals(messageDisplayed, expectedMessage, "Message displayed is different from requirement");
+            String messageDisplayed = messageCustomerSupport.getText();
+            String expectedMessage = "We're here to help.";
+            Assert.assertEquals(messageDisplayed, expectedMessage, "Message displayed is different from requirement");
         } else{
             System.out.println("Expected message is not displayed");
         }
 
     }
 
+
     @Test(priority = 5)
-    public void RentingACarByModel_TestByDavid() throws InterruptedException {
+    public void David_RentingACarByModel_Test() throws InterruptedException {
         WebElement carButton = driver.findElement(By.id("tab-car-tab-hp"));
         carButton.click();
         Thread.sleep(3000);
@@ -233,7 +238,7 @@ public class BugHunterz {
 
 
     @Test(priority = 6)
-    public void LookAHotelByGuestRating_TestByDavid() throws InterruptedException {
+    public void David_LookAHotelByGuestRating_Test() throws InterruptedException {
         WebElement hotelsButton = driver.findElement(By.id("tab-hotel-tab-hp"));
         hotelsButton.click();
         WebElement hoteldestination = driver.findElement(By.id("hotel-destination-hp-hotel"));
@@ -245,9 +250,9 @@ public class BugHunterz {
         GuestRatingRadioButton.click();
 
     }
-
     @Test(priority = 7)
-    public void editMySearchResultsByAmirHamza(){
+
+    public void editMySearchResults(){
         HamzaUtil();
         //   Once i put my search preferences  i should be able to change it from the same page.
 
@@ -266,7 +271,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 8)
-    public void navigateToTheHomePageByClickingExpediaLogoByAmirHamza(){
+    public void navigateToTheHomePageByClickingExpediaLogo(){
         HamzaUtil();
         //I want to be able to go to home page by clicking the Expedia icon and discart everything.
 
@@ -281,7 +286,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 9)
-    public void lookUpMySearchHistoryByAmirHamza(){
+    public void lookUpMySearchHistory(){
         HamzaUtil();
         // I want to be able to see the history of my searches.
 
@@ -292,17 +297,17 @@ public class BugHunterz {
 
         sp.expediaButton().click();
 
-        eh.searchHistory().click();
+        eh2.searchHistory().click();
 
-        eh.recentSearches().click();
+        eh2.recentSearches().click();
 
-        List<WebElement> listOfSearches = eh.getListOfPackages();
+        List<WebElement> listOfSearches = eh2.getListOfPackages();
 
         boolean check = listOfSearches.size()>0;
         Assert.assertTrue(check);
     }
     @Test(priority = 10)
-    public static void BundleAndSaveByEmre() throws InterruptedException {
+    public static void BundleAndSaveEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to bundle flight and hotel and get savings*/
 
@@ -350,7 +355,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 11)
-    public static void RoundTripByEmre() throws InterruptedException {
+    public static void RoundTripEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to be able to shedule a roundtrip flight.*/
 
@@ -440,7 +445,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 12)
-    public static void BestPricesByEmre() throws InterruptedException {
+    public static void BestPricesEmre() throws InterruptedException {
         /*EMRE*/
         /*I want to get the best prices first when searching for flights.*/
 
@@ -504,7 +509,7 @@ public class BugHunterz {
     }
 
     @Test(priority = 13)
-    public  void thingsToDo1ByAizada() throws InterruptedException{
+    public  void thingsToDo1() throws InterruptedException{
 
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
@@ -535,7 +540,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 14)
-    public  void pressOnTickets2ByAizada() throws InterruptedException{
+    public  void pressOnTickets2() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -570,9 +575,8 @@ public class BugHunterz {
         ticketsAtractions.click();
         Thread.sleep(10000);
 
-    }
-    @Test (priority = 15)
-    public  void pressOnInterestsByAizada() throws InterruptedException{
+    }@Test (priority = 15)
+    public  void pressOnInterests() throws InterruptedException{
         WebElement thingsToDo = driver.findElement(By.cssSelector("#tab-activity-tab-hp"));
         thingsToDo.click();
         WebElement destination = driver.findElement(By.cssSelector("#activity-destination-hp-activity"));
@@ -608,7 +612,7 @@ public class BugHunterz {
         Thread.sleep(7000);
     }
     @Test(priority = 16)
-    public void scheduleFlightEightMonthsInAdvanceByNadejda()throws InterruptedException{
+    public void scheduleFlightEightMonthsInAdvance()throws InterruptedException{
         // Scenario: I want to be able to schedule my flights eight months in advance
 
         sf.Flight().click();
@@ -633,10 +637,10 @@ public class BugHunterz {
         driver.findElement(By.xpath("(//button[@class='btn-primary btn-action gcw-submit'])[1]")).click();
 
         boolean check = driver.findElement(By.cssSelector(".title-city-text")).getText().contains("Select your departure to");
-           Assert.assertTrue(check,"Verification of calendar FAILED");
+        Assert.assertTrue(check,"Verification of calendar FAILED");
     }
     @Test(priority = 17)
-    public void getCustomerSupportByNadejda(){
+    public void getCustomerSupport(){
         // Scenario2: I want to be able to get customer support.
 
         //clicking on suport button
@@ -666,7 +670,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 18)
-    public void getSuggestionsWhenLookingForDestinationByNadejda(){
+    public void getSuggestionsWhenLookingForDestination(){
         //I want to get suggestion when i start searching for a destination.
 
         sf.HotelButton().click();
@@ -684,7 +688,7 @@ public class BugHunterz {
 
     }
     @Test(priority = 19)
-    public void ortHotelPriceMethod1_testByGulmira() throws InterruptedException {
+    public void gulmira_sortHotelPriceMethod1_test() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
@@ -719,7 +723,7 @@ public class BugHunterz {
     //I want to be able to search for vacation rentals and get a list with the available dates that im looking for
 
     @Test(priority = 20)
-    public void vacationRentalsSearchMethod2_testByGulmira() throws InterruptedException {
+    public void gulmira_vacationRentalsSearchMethod2_test() throws InterruptedException {
         WebElement vacationRentals = driver.findElement(By.id("primary-header-vacationRental"));
         vacationRentals.click();
         WebElement destination = driver.findElement(By.id("VR-destination"));
@@ -751,7 +755,7 @@ public class BugHunterz {
     //I want to see the number of reviews and rating of each hotel
 
     @Test(priority = 21)
-    public void hotelReviewAndRatingMethod3_testByGulmira() throws InterruptedException {
+    public void gulmira_hotelReviewAndRatingMethod3_test() throws InterruptedException {
         WebElement hotels = driver.findElement(By.cssSelector("#tab-hotel-tab-hp"));
         hotels.click();
         WebElement goingTo = driver.findElement(By.xpath("//input[@data-city_element='hotel-destination-hp-hotel-city']"));
@@ -782,5 +786,97 @@ public class BugHunterz {
             System.out.println("List of Reviews and Ratings are Passed");
         }
     }
+
+    @Test(priority = 22)
+    public void searchUpcomingGamesCesar()
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+
+        }
+        //3 - Finally it searches up "Chicago Bears" within the search bar.
+        finally
+        {
+            etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
+        }
+
+    }
+
+    @Test(priority =  23)
+    public void searchConcertsByArtistCesar() throws InterruptedException
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+
+        }
+        //3 - Finally it searches up "ACDC" within the search bar and hits ENTER.
+        finally
+        {
+            Thread.sleep(3000);
+            etp.getSearchBar().sendKeys("ACDC" + Keys.ENTER);
+        }
+    }
+
+    @Test(priority = 24)
+    public void findHomeGameCesar() throws InterruptedException
+    {
+        //1 - Clicks On "Things To Do" tab on the top navigation bar
+        eh.thingsToDoTab().click();
+
+        //2 - Attempts to find the "Event Tickets" tab (due to some selenium errors)
+        //    Otherwise it navigates to that page directly
+        try
+        {
+            eh.eventTicketsTab().click();
+        }
+        catch(Exception ex)
+        {
+            driver.navigate().to("https://www.expedia.com/event-tickets/?rfrr=BEXetix&utm_source=expedia_search&utm_medium=event_tickets&utm_campaign=expedia_search_events_tickets_tab");
+        }
+        finally
+        {
+            Thread.sleep(4000);
+
+            //Clicks On "Destination" & clicks on "Current Location"
+            etp.getDestinationLink().click();
+            etp.getCurrentLocationLink().click();
+
+            //Searches "Chicago Bears" in the search bar
+            Thread.sleep(3000);
+            etp.getSearchBar().sendKeys("Chicago Bears" + Keys.ENTER);
+
+            //Now we should choose the first option if the it says 'Chicago, IL'
+            //That means that game will be home game
+            if(driver.findElement(By.xpath("//div[@class = 'event-list']/div/a/table/tbody/tr/td[2]/div/div[2]/span/span")).getText().contains("Chicago"))
+            {
+                //Click on the element
+                driver.findElement(By.xpath("//div[@class = 'event-list']/div/a")).click();
+
+            }
+        }
+                                                                                                    //Hope this works ..
+
+    }
+
 
 }
