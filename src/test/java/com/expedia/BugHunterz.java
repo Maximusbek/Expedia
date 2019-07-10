@@ -26,7 +26,7 @@ public class BugHunterz {
     static WebDriverWait d;
     static ExpediaHomePage2 eh;
     static SearchPage sp;
-
+    static BaseClass sf;
 
     @BeforeClass
     public void setup() {
