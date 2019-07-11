@@ -13,8 +13,8 @@ public class ExpediaHomepage {
         this.driver = driver;
     }
 
-    By thingsToDo = By.id("primary-header-activity");
-    By eventTickets = By.cssSelector(".link.event-tickets-link");
+    By thingsToDo = By.cssSelector("button#tab-activity-tab-hp");
+    By eventTickets = By.cssSelector("a.link.event-tickets-link");
 
     public WebElement thingsToDoTab()
     {
