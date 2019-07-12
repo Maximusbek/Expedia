@@ -13,7 +13,7 @@ public class ExpediaHomepage {
         this.driver = driver;
     }
 
-    By thingsToDo = By.id("tab-activity-tab-hp");
+    By thingsToDo = By.cssSelector("button#tab-activity-tab-hp");
     By eventTickets = By.cssSelector("a.link.event-tickets-link");
 
     public WebElement thingsToDoTab()
