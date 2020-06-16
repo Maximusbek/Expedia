@@ -22,6 +22,7 @@ public class Aizada {
         pressOnTickets2();
 
         pressOnInterests();
+        //
     }
     public static void thingsToDo1() throws InterruptedException{
 
